@@ -1,4 +1,5 @@
 const request = require('postman-request');
+require('dotenv').config();
 
 // Goal: Create a reusable function for getting the forecast
 //
@@ -10,7 +11,7 @@ const request = require('postman-request');
 //    - Success, pass forecast string for data (same format as from before)
 
 const forecast = (latitude, longitude, callback) => {
-  const url = `http://api.weatherstack.com/current?access_key=14ebd1b915b7a62ac8c927c02e9ab2b0&units=f&query=${latitude},${longitude}`;
+  const url = `http://api.weatherstack.com/current?access_key=${process.env.WEATHERSTACK_API_KEY}&units=f&query=${latitude},${longitude}`;
   
   request({url, json: true}, (error, {body}) => {
     if (error) {
